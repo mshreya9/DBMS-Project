@@ -54,44 +54,52 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-lg-4">
-                <div>
-                    <table style="border:2px solid green; width:100%;">
-                        <tr style="border:2px solid blue;">
-                            <th>Register ID</th>
-                            <th>Email</th>
-                            <th>From-date</th>
-                            <th>To-date</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Room Number</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>shr@gmail.com</td>
-                            <td>12</td>
-                            <td>17</td>
-                            <td>20</td>
-                            <td>Female</td>
-                            <td>422</td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>eya@gmail.com</td>
-                            <td>20</td>
-                            <td>27</td>
-                            <td>19</td>
-                            <td>Male</td>
-                            <td>122</td>
-                        </tr>
-
-                    </table>
-                </div>
-            </div>
+        <div style="padding:50px 80px 50px 80px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Register ID</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">From-date</th>
+                        <th scope="col">To-date</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Room Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>shr@gmail.com</td>
+                        <td>12</td>
+                        <td>16</td>
+                        <td>20</td>
+                        <td>Female</td>
+                        <td>422</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>eya@gmail.com</td>
+                        <td>22</td>
+                        <td>26</td>
+                        <td>19</td>
+                        <td>Male</td>
+                        <td>122</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>nik@gmail.com</td>
+                        <td>2</td>
+                        <td>6</td>
+                        <td>21</td>
+                        <td>Male</td>
+                        <td>222</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
 
 
 
@@ -111,6 +119,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script>
+        let div = document.createElement("div");
+        div.setAttribute("style", "padding:50px 80px 50px 80px");
+        let table = document.createElement("table");
+        table.setAttribute("class", "table");
+        let thead = document.createElement("thead");
+        let tr = document.createElement("tr");
+        let th = document.createElement("th");
+    </script>
 </body>
 
 </html>
