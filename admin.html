@@ -57,6 +57,9 @@
                 <div>
                     <a href="view.html"><input type="button" class="viewing-btn" value="View all bookings"></a>
                 </div>
+                <div>
+                    <input type="button" value="Logout" id="logout">
+                </div>
             </div>
             <div class="col-12 col-lg-4"></div>
         </div>
@@ -71,6 +74,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+        <script>
+        
+        window.onload = () => {
+            document.getElementById('logout').addEventListener("click", () => {
+                window.localStorage.removeItem("token");
+                window.location.href = "login.html";
+            })
+        }</script>
 </body>
 
 </html>

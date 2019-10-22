@@ -77,7 +77,6 @@ router.post('/book', middleware, (request, response) => {
 
       res_id = request.body.roomno + request.body.age*helpers.createPassword(8);
       let sqlq = "INSERT INTO reservation VALUES ('"+request.body.name+"',"+request.body.age+",'"+request.body.gender+"','"+request.body.email+"',"+request.body.roomno+",'"+request.body.from_date+"','"+request.body.to_date+"',"+res_id+")"
-      console.log(sqlq)
       con.query(sqlq, function (err, result) {
         if (err) {
           response.status(200).json({

@@ -54,48 +54,22 @@
     </nav>
 
     <div class="container-fluid">
-        <div style="padding:50px 80px 50px 80px;">
-            <table class="table">
+        <div style="padding:50px 80px 50px 80px;overflow-x:scroll;overflow-y:visible;">
+            <table id="table" class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Register ID</th>
+                        <th scope="col">Reservation ID</th>
+                        <th scopr="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">From-date</th>
                         <th scope="col">To-date</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Gender</th>
                         <th scope="col">Room Number</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Age</th>
+
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>shr@gmail.com</td>
-                        <td>12</td>
-                        <td>16</td>
-                        <td>20</td>
-                        <td>Female</td>
-                        <td>422</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>eya@gmail.com</td>
-                        <td>22</td>
-                        <td>26</td>
-                        <td>19</td>
-                        <td>Male</td>
-                        <td>122</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>nik@gmail.com</td>
-                        <td>2</td>
-                        <td>6</td>
-                        <td>21</td>
-                        <td>Male</td>
-                        <td>222</td>
-                    </tr>
-                </tbody>
+                
             </table>
         </div>
     </div>
@@ -119,14 +93,39 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+
     <script>
-        let div = document.createElement("div");
-        div.setAttribute("style", "padding:50px 80px 50px 80px");
-        let table = document.createElement("table");
-        table.setAttribute("class", "table");
-        let thead = document.createElement("thead");
-        let tr = document.createElement("tr");
-        let th = document.createElement("th");
+
+
+        window.onload = () => {
+            console.log("Hello")
+            var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+            xmlhttp.open("GET", "http://localhost:3000/auth/getreservations");
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.setRequestHeader("Authorization", localStorage.getItem("token"));
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    console.log(JSON.parse(xmlhttp.responseText).data)
+                    let tbody = document.createElement("tbody");
+                    for (let i = 0; i < JSON.parse(xmlhttp.responseText).data.length; i++) {
+                        let tr = document.createElement("tr");
+                        let fill = ["RES_ID", "NAME", "EMAIL", "FROM_DATE", "TO_DATE", "ROOM_NO", "GENDER", "AGE"]
+                        for (let j = 0; j < 8; j++) {
+                            let td = document.createElement("td");
+                            let text = document.createTextNode(JSON.parse(xmlhttp.responseText).data[i][fill[j]]);
+                            td.appendChild(text);
+                            tr.appendChild(td);
+                        }
+                        tbody.appendChild(tr);
+                    }
+                    document.getElementById("table").appendChild(tbody);
+                }
+            };
+
+        }
+
     </script>
 </body>
 
