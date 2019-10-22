@@ -1,0 +1,57 @@
+body {
+    font-family: 'Barlow', sans-serif;
+}
+.login-page{
+    text-align:center;
+    margin-top:50px;
+}
+input:focus,
+button:focus {
+    outline: none;
+}
+.nav-item {
+    padding-left : 10px;
+    padding-right : 10px;
+}
+#shadow{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.30);
+}
+.nav-link {
+    font-size : 18px;
+}
+.navbar-brand {
+    font-size: 22px;
+}
+input{
+    width:80%;
+    padding: 5px 20px;
+    margin-top:50px;
+    color:black;
+    display: inline-block;
+    font-size:18px;
+    height:55px;
+    border:2px solid blue;
+    background-color:white;
+    border-radius:40px;
+    text-decoration:none;
+    cursor:pointer;
+}
+input:hover{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.30);
+}
+.login-button, .register-button, .cancel-btn, .book-btn{
+    width:auto;
+    color:black;
+    padding:5px 50px;
+    border-radius:40px;
+    border:2px solid;
+    background-color: white;
+    font-size:18px;
+    cursor: pointer;
+}
+.login-button:hover, .register-button:hover, .cancel-btn:hover, .book-btn:hover{
+    color:white;
+    border:2px solid #0a0a4d;
+    background-color: #0a0a4d;
+    transition: 0.5s;
+}
