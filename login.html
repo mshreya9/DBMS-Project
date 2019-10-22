@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white"  id="shadow">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" id="shadow">
         <a class="navbar-brand" href="#">
             <span>Hotel Management</span>
         </a>
@@ -50,6 +50,7 @@
                     <div>
                         <h3>Login</h3>
                     </div>
+                    <div id="error" style="color : red; display: none;">The username password entered ny user was incorrect!</div>
                     <div>
                         <input id="email" placeholder="Email" type="email" name="emailaddress">
                     </div>
@@ -57,7 +58,7 @@
                         <input id="passwd" placeholder="Password" type="password">
                     </div>
                     <div>
-                        <input type="button" class="login-button" value="Login">
+                        <input id="login" type="button" class="login-button" value="Login">
                     </div>
                 </div>
             </div>
@@ -74,6 +75,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+    <script>
+
+        window.onload = () => {
+
+            document.getElementById("login").addEventListener("click", () => {
+                let username = document.getElementById("email");
+                let password = document.getElementById("passwd");
+                var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+                xmlhttp.open("POST", "http://localhost:3000/auth/login");
+                xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xmlhttp.send(JSON.stringify({ "id": username.value, "password": password.value }));
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        if (JSON.parse(xmlhttp.responseText).token) {
+                            window.localStorage.setItem("token", JSON.parse(xmlhttp.responseText).token);
+                            window.location.href = "admin.html"
+                        } else {
+                            document.getElementById("error").style.display = "block"
+                        }
+                    }
+                };
+            })
+        }
+
+    </script>
 </body>
 
 </html>

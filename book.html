@@ -49,8 +49,9 @@
                     <div style="margin-top:100px;">
                         <h3>Booking Portal</h3>
                     </div>
+                    <div id="status" style="color : blue"></div>
                     <div>
-                        <input id="reg-id" placeholder="Register ID" type="number">
+                        <input id="name" placeholder="Name" type="text">
                     </div>
                     <div>
                         <input id="email" placeholder="Email" type="email" name="emailaddress">
@@ -62,7 +63,7 @@
                         <input id="to-date" placeholder="To" type="date">
                     </div>
                     <div>
-                        <input id="age" placeholder="Age" type="number" min="15" max="85">
+                        <input id="age" placeholder="Age" type="number" min="3" max="85">
                     </div>
                     <div>
                         <input id="gender" placeholder="Gender" type="text">
@@ -71,7 +72,7 @@
                         <input id="room-no" placeholder="Room Number" type="number" min="1" max="800">
                     </div>
                     <div style="margin-bottom:40px;">
-                        <input type="button" class="book-btn" value="Book">
+                        <input type="button" id="book" class="book-btn" value="Book">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4"></div>
@@ -87,6 +88,32 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+
+        <script>
+
+
+            window.onload = () => {
+
+                document.getElementById("book").addEventListener("click", () => {
+                    let name = document.getElementById("name");
+                    let age = document.getElementById("age");
+                    let gender = document.getElementById("gender");
+                    let room_no = document.getElementById("room-no");
+                    let email = document.getElementById("email");
+                    let from_date = document.getElementById("from-date");
+                    let to_date = document.getElementById("to-date")
+                    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+                    xmlhttp.open("POST", "http://localhost:3000/auth/book");
+                    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");            
+                    xmlhttp.setRequestHeader("Authorization", localStorage.getItem("token"));
+                    xmlhttp.send(JSON.stringify({ "name": name.value, "age": age.value, "gender": gender.value, "email": email.value, "roomno": room_no.value, "from_date": from_date.value, "to_date" : to_date.value  }));
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById("status").innerHTML = JSON.parse(xmlhttp.responseText).message;
+                        }
+                    };
+                })
+            }</script>
 </body>
 
 </html>

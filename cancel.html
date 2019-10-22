@@ -49,11 +49,12 @@
                     <div style="margin-top:100px;">
                         <h3>Cancellation Portal</h3>
                     </div>
+                    <div id="status" style="color : blue"></div>
                     <div>
-                        <input id="reg-id" placeholder="Register ID" type="number">
+                        <input id="res_id" placeholder="Reservation ID" type="number">
                     </div>
                     <div style="margin-bottom:30px;">
-                        <input type="button" class="cancel-btn" value="Cancel">
+                        <input id="cancel" type="button" class="cancel-btn" value="Submit">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4"></div>
@@ -69,6 +70,28 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+
+
+
+        <script>
+
+
+            window.onload = () => {
+
+                document.getElementById("cancel").addEventListener("click", () => {
+                    let res_id = document.getElementById("res_id");
+                    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+                    xmlhttp.open("POST", "http://localhost:3000/auth/cancel");
+                    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");            
+                    xmlhttp.setRequestHeader("Authorization", localStorage.getItem("token"));
+                    xmlhttp.send(JSON.stringify({ "res_id": res_id.value }));
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById("status").innerHTML = JSON.parse(xmlhttp.responseText).message;
+                        }
+                    };
+                })
+            }</script>
 </body>
 
 </html>
